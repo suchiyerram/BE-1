@@ -2,7 +2,7 @@ const books=[
     {
         ISBN:"12345",
         title:"mern stack",
-        pubDate:2002-11-10,
+        pubDate:"2002-11-10",
         lan:"en",
         numpage:250,
         author:[1,2],
@@ -13,7 +13,7 @@ const books=[
     {
         ISBN:"1234567",
         title:"mean stack",
-        pubDate:2002-11-26,
+        pubDate:"2002-11-26",
         lan:"tel",
         numpage:398,
         author:[1],
@@ -23,7 +23,7 @@ const books=[
     {
         ISBN:"123456789 MSD",
         title:"full stack",
-        pubDate:2005-12-16,
+        pubDate:"2005-12-16",
         lan:"us",
         numpage:657,
         author:[1,3],

@@ -1,10 +1,13 @@
 const suchi=require("express");
+var bodyParser=require("body-parser");
 
 // require our file(db)
 const database=require("./db");
 
 // initialize express
 const booky=suchi();
+booky.use(bodyParser.urlencoded({extended:true}));
+booky.use(bodyParser.json());
 // get all books
 booky.get("/", (req,res)=>
 {
@@ -61,6 +64,29 @@ booky.get("/author/book/:isbn",(req,res)=>
 booky.get("/p/:publication",(req,res)=>
 {
     return res.json({publication:database.publication});
-})
+});
+// add new books
+booky.post("/book/:new",(req,res)=>
+{
+    const Newbook=req.body;
+    database.books.push(Newbook);
+    return res.json({updatedBooks:database.books});
+
+});
+// add new author
+booky.post("/author/:new",(req,res)=>
+{
+    const Newauthor=req.body;
+    database.author.push(Newauthor);
+    return res.json({updatedAuthors:database.author});
+});
+// add new publication
+booky.post("/pub/:new",(req,res)=>
+{
+    const Newpub=req.body;
+    database.publication.push(Newpub);
+    return res.json({updatedPublications:database.publication});
+});
+
 
 booky.listen(3999,()=> console.log("Running"));
