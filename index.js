@@ -87,6 +87,32 @@ booky.post("/pub/:new",(req,res)=>
     database.publication.push(Newpub);
     return res.json({updatedPublications:database.publication});
 });
+// update pub and book
+booky.put("/publication/update/book/:isbn",(req,res)=>
+{
+    // update the pub db
+    database.publication.forEach((pub)=>{
+        if(pub.id===req.body.pubId)
+        {
+            return pub.books.push(req.params.isbn)
+        }
+    });
+    // update the book db
+    database.books.forEach((book)=>
+    {
+        if(book.ISBN===req.params.isbn)
+        {
+            book.publication=req.body.pubId;
+            return;
+        }
+    });
+    return res.json({
+        books:database.books,
+        publication:database.publication,
+        message:"successfully updated"
+
+    });
+});
 
 
 booky.listen(3999,()=> console.log("Running"));
