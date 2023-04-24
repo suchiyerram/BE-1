@@ -60,7 +60,7 @@ const publication=[
     {
         id:2,
         name:"internshala",
-        books:["12345","1234567"]
+        books:[]
     },
     {
         id:3,

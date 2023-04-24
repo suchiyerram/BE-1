@@ -106,13 +106,23 @@ booky.put("/publication/update/book/:isbn",(req,res)=>
             return;
         }
     });
-    return res.json({
+    return res.json(
+        {
         books:database.books,
-        publication:database.publication,
-        message:"successfully updated"
+        publications:database.publication,
+        message:"updated"
 
-    });
+    }
+    );
+});
+// delete a book
+booky.delete("/book/delete/:isbn",(req,res)=>
+{
+    const updateBookdatabase=database.books.filter((book)=>book.ISBN!==req.params.isbn);
+    database.books=updateBookdatabase;
+    return res.json({books:database.books})
+
 });
 
 
-booky.listen(3999,()=> console.log("Running"));
+booky.listen(999,()=> console.log("Running"));
