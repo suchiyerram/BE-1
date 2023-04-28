@@ -123,6 +123,37 @@ booky.delete("/book/delete/:isbn",(req,res)=>
     return res.json({books:database.books})
 
 });
+// delete an author from a book and vice versa
+booky.delete("/book/delete/author/:isbn/:authorId",(req,res)=>
+{
+    //update the book db
+    database.books.forEach((book)=>
+    {
+        if(book.ISBN === req.params.isbn)
+        {
+            const newAuthorlist=book.author.filter((eachAuthor)=>eachAuthor!==parseInt(req.params.authorId));
+            book.author=newAuthorlist;
+            return;
+        }
+
+    });
+    // update author db
+    database.author.forEach((eachAuthor)=>
+    {
+        if(eachAuthor.id===parseInt(req.params.id));f
+        const newBooklist=eachAuthor.books.filter((book=>book!==req.params.isbn));
+        eachAuthor.books=newBooklist;
+        return;
+    });
+    return res.json({
+        book:database.books,
+        author:database.author,
+        message:"deleted"
+
+    })
+
+});
 
 
-booky.listen(999,()=> console.log("Running"));
+
+booky.listen(3999,()=> console.log("Running"));
